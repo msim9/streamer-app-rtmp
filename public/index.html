@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Playlist Manager</title>
+  <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons (optional, but nice for UI) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Video Playlist Manager</h1>
+            <div class="header-actions">
+                <button id="startStreamingBtn" class="header-button"><i class="fas fa-broadcast-tower"></i> Start Streaming</button>
+                <button id="addVideoBtn" class="header-button"><i class="fas fa-plus"></i> Add Video</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <aside class="sidebar">
+                <h2>Playlist</h2>
+                <ul id="playlist" class="playlist-items">
+                    <!-- Playlist items will be dynamically added here -->
+                    <!-- Example Item Structure (for reference):
+                    <li class="playlist-item" data-id="1">
+                        <i class="fas fa-grip-vertical drag-handle"></i>
+                        <img src="placeholder.png" alt="thumbnail" class="thumbnail">
+                        <div class="item-details">
+                            <span class="item-title">Video Title</span>
+                            <span class="item-schedule">Scheduled: 4/10/2025, 5:08 PM</span>
+                        </div>
+                        <div class="item-status playing">Playing</div>
+                        <div class="item-actions">
+                            <button class="play-item-btn"><i class="fas fa-play"></i></button>
+                            <button class="remove-item-btn"><i class="fas fa-times"></i></button>
+                        </div>
+                    </li>
+                     -->
+                </ul>
+                <div class="playlist-controls">
+                    <button id="savePlaylistBtn"><i class="fas fa-save"></i> Save Playlist</button>
+                    <button id="clearPlaylistBtn"><i class="fas fa-trash"></i> Clear</button>
+                </div>
+            </aside>
+
+            <section class="content-area">
+                <div class="video-preview-container">
+                    <h2>Video Preview</h2>
+                    <div class="video-wrapper">
+                        <video id="videoPlayer" controls></video>
+                        <div class="lower-thirds hidden">
+                            <div class="ticker-container">
+                                <div class="ticker-text">
+                                    Breaking News: Facebook Tightens Monetisation Rules, Resulting in Loss of Earnings for Many Pages • 
+                                    Latest Update: New Policy Changes Affect Content Creators • 
+                                    Stay Tuned: More Updates Coming Soon
+                                </div>
+                            </div>
+                            <div class="ticker-controls">
+                                <button id="toggleTicker">Hide Ticker</button>
+                                <button id="editTicker">Edit Text</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="player-controls">
+                        <button id="playBtn"><i class="fas fa-play"></i> Play</button>
+                        <button id="pauseBtn"><i class="fas fa-pause"></i> Pause</button>
+                        <button id="nextBtn"><i class="fas fa-forward"></i> Next Video</button>
+                    </div>
+                </div>
+
+                <div class="playback-info">
+                    <div class="now-playing">
+                        <h2>Now Playing</h2>
+                        <div id="nowPlayingContent">
+                            <p>No video selected.</p>
+                            <!-- Content updated dynamically -->
+                        </div>
+                    </div>
+                    <div class="up-next">
+                        <h2>Up Next</h2>
+                        <div id="upNextContent">
+                             <p>No video queued.</p>
+                            <!-- Content updated dynamically -->
+                        </div>
+                    </div>
+                </div>
+                 <div class="streaming-controls">
+                     <h3>Streaming Platform</h3>
+                     <div class="platform-selection">
+                         <div class="radio-group">
+                             <label>
+                                 <input type="radio" name="platform" value="custom" checked>
+                                 Custom RTMP
+                             </label>
+                         </div>
+                     </div>
+                     
+                     <div id="rtmpFields">
+                         <div class="form-group">
+                             <label for="rtmpUrl">RTMP URL:</label>
+                             <input type="text" id="rtmpUrl" value="rtmp://x.streamablecloud.com/live/" class="form-control">
+                         </div>
+                         <div class="form-group">
+                             <label for="streamKey">Stream Key:</label>
+                             <input type="text" id="streamKey" value="barkattv" class="form-control">
+                         </div>
+                     </div>
+
+                     <button id="startStreamingBtn" class="action-button">
+                         <i class="fas fa-broadcast-tower"></i> Start Streaming
+                     </button>
+                     <div id="streamingStatus">Status: Idle</div>
+                 </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add Video Modal -->
+    <div id="addVideoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Add Video</h2>
+            <form id="addVideoForm">
+                <div class="form-group">
+                    <label for="videoTitle">Title:</label>
+                    <input type="text" id="videoTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="videoFile">Video File:</label>
+                    <input type="file" id="videoFile" accept="video/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="scheduleTime">Schedule Time (optional):</label>
+                    <input type="datetime-local" id="scheduleTime">
+                </div>
+                <button type="submit" class="action-button">Add Video</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script> <!-- For drag & drop -->
+  <script src="script.js"></script>
+</body>
+</html>
